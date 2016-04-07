@@ -1,7 +1,6 @@
 require "tilt/erubis"
 require "sinatra"
-require "sinatra/reloader"
-require 'pry'
+require "sinatra/reloader" if development?
 
 before do
   @chapters = File.readlines("data/toc.txt")
@@ -16,7 +15,7 @@ helpers do
     @paragraphs = {}
     @chapters.each_with_index do |chapter, idx|
       File.read("data/chp#{idx + 1}.txt").split("\n\n").each_with_index do |paragraph, p_idx|
-        if paragraph.downcase.match(search.downcase)
+        if search && paragraph.downcase.match(search.downcase)
           @paragraphs[chapter] = [paragraph, p_idx]
           break
         end
