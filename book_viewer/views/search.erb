@@ -1,0 +1,18 @@
+<h2 class="content-subhead">Search</h2>
+
+<form action="/search" method="get">
+  <input name="query" value="<%= params[:query] %>">
+  <button type="submit">Search</button>
+</form>
+<br>
+<h2>Results for: "<%= params[:query] %>"</h2>
+
+<% if params[:query] %>
+  <% if @chapters.select { |chapter| chapter.match(params[:query]) } %>
+      <% @chapters.each_with_index do |chapter, idx| %>
+        <% next unless @paragraphs.keys.include?(chapter) %>
+          <a href="/chapters/<%= idx + 1 %>" class="pure-menu-link"><h4><%= chapter %></h4></a>
+          <a href="/chapters/<%= idx + 1 %>#<%= @paragraphs[chapter][1] %>"<p><%= @paragraphs[chapter][0] %><p></a>
+      <% end %>
+  <% end %>
+<% end %>
