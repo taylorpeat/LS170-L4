@@ -1,0 +1,20 @@
+<!doctype HTML>
+<html>
+<head>
+  <title>Dynamic Directory</title>
+</head>
+<body>
+  <h1>List of Files</h1>
+  <ul>  
+    <% @files.each do |file| %>
+      <li><a href=<%= file %>><%= file %></a></li>
+    <% end %>
+  </ul>
+
+  <% if params[:sort] == "desc" %>
+    <a href="/">Sort Ascending</a>
+  <% else %>  
+    <a href="/?sort=desc">Sort Descending</a>
+  <% end %>
+</body>
+</html>
