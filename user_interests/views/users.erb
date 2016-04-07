@@ -1,0 +1,4 @@
+<h1>User List:</h1>
+<% @users.each do |user| %>
+  <a href="users/<%= user[0] %>"><%= user[0] %></a>
+<% end %>
